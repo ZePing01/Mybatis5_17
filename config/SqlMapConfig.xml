@@ -6,7 +6,24 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <!-- 上面是约束 -->
 
 <configuration>
-
+    <!-- 加载属性文件 -->
+    <properties resource="db.properties">
+       <!-- properties中还可以配置一些属性名和属性值 -->
+       <property name="" value=""/>
+    </properties>
+    
+    <!-- 别名 -->
+    <typeAliases>
+     <!-- 针对单个别名定义
+      type：类型的路径
+      alias：别名
+     -->
+      <!--<typeAlias type="cn.lzp.po.Student" alias="student"/>-->
+     <!-- 批量别名定义
+                  指定的包名：mybatis自动扫描包中的po类，自动定义别名：别名就是类名（首字母大写或者小写都可以）            
+      -->
+      <package name="cn.lzp.po"/>
+    </typeAliases>
 	<!-- 和spring整合后 environments配置将废除-->
 	<environments default="development">
 		<environment id="development">
@@ -14,10 +31,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			<transactionManager type="JDBC" />
 		<!-- 数据库连接池，由mybatis管理-->
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://172.16.120.116:3306/signin?characterEncoding=utf-8" />
-				<property name="username" value="root" />
-				<property name="password" value="zhaobo.." />
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 		</environment>
 	</environments>
@@ -25,7 +42,21 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 加载映射文件 -->
 	<mappers>
 	  <mapper resource="sqlmap/Student.xml"/>
-	  <mapper resource="mapper/StudentMapper.xml"/><!-- 注意路径 -->
+	  <!-- 通过Resource方法一次家在一个映射文件 -->
+	  <!-- <mapper resource="mapper/StudentMapper.xml"/> --><!-- 注意路径 -->
+	  
+	  <!-- 通过Mapper接口加载映射文件
+	         遵循一些规范：需要将Mapper接口类和Mapper.xml映射文件名保持一致，且在一个目录中
+	         上边规范的前提是：使用的是mapper代理的方法
+	   -->
+	  <!--  <mapper class="cn.lzp.mapper.StudentMapper"/> -->
+	  
+	  <!-- 批量加载Mapper
+	         指定Mapper接口的包名：Mybatis自动扫描包下遍所有的Mapper接口进行加载
+	         遵循一些规范：需要将Mapper接口类和Mapper.xml映射文件名保持一致，且在一个目录中
+	         上边规范的前提是：使用的是mapper代理的方法
+	   -->
+	   <package name="cn.lzp.mapper"/>
 	</mappers>
 	
 </configuration>
