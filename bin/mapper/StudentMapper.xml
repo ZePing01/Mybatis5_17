@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射文件  -->
+
+<!-- 
+  namespace命名空间，作用就是对sql进行分类化管理，隔离sql
+      注意：使用mapper代理方法开发，namespace有重要的作用
+ -->
+<mapper namespace="cn.lzp.mapper.StudentMapper">
+     <!-- 在映射文件中设置sql语句 -->
+     <!-- 需求：通过id查询学生表的记录 -->
+     <!-- 通过select执行数据库查询
+          id：标识映射文件中的Sql
+                              将sql语句封装到mappedStatement对象中，所以id称为statement的is
+          paremeterType:指定输入参数的类型 
+          #{}表示一个占位符
+          #{id}：其中的id表示接收输入的参数，参数的名称就是id,#{}中的参数名可以任意，可以是value或其他名称
+          resultType：指定sql输出结果的所以映射的java对象类型，select指定resultType表示将单条记录映射成java对象
+      -->
+     <select id="findStudentBySid" parameterType="int" resultType="cn.lzp.po.Student">
+          SELECT * FROM db_student WHERE sid=#{value}
+     </select>
+     
+     <!-- 需求：通过姓名查询学生表的记录 -->
+     <select id="findStudentBySname" parameterType="java.lang.String" resultType="cn.lzp.po.Student">
+        SELECT * FROM db_student WHERE sname LIKE '%${value}%' 
+     </select>
+     
+     <!-- 添加学生 -->
+     <insert id="insertStudent" parameterType="cn.lzp.po.Student">
+        <!--自增主键的返回  
+                           将插入数据的自增主键值返回 到Student中
+          SELECT LAST_INSERT_ID()：得到刚才insert进去的主键值，适用于自增主键
+          keyProperty：将查询到的主键值设置到parameterType中的任意指定属性
+          order：SELECT LAST_INSERT_ID()这条语句相较于insert语句的执行顺序
+        -->
+        <selectKey keyProperty="sid" order="AFTER"  resultType="java.lang.Integer">
+           SELECT LAST_INSERT_ID()
+        </selectKey>
+     
+        INSERT INTO db_student(sname,snumber,spass,ssex,sage,sdate,cid,aid,isSchool) VALUES(#{sname},#{snumber},#{spass},#{ssex},#{sage},#{sdate},#{cid},#{aid},#{isSchool})
+     </insert>
+     
+     <!-- 删除学生
+                      根据id
+      -->
+     <delete id="deleteStudent" parameterType="java.lang.Integer">
+       DELETE FROM db_student WHERE sid=#{value}
+     </delete>
+     
+     <!-- 更新信息 -->
+     <update id="updateStudent" parameterType="cn.lzp.po.Student">
+       UPDATE db_student SET sname=#{sname},snumber=#{snumber},spass=#{spass},ssex=#{ssex},sage=#{sage},sdate=#{sdate},cid=#{cid},aid=#{aid},isSchool=#{isSchool} where sid=#{sid}
+     </update>
+</mapper>
