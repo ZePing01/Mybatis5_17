@@ -92,15 +92,11 @@ public class MybatisFirst {
 			
 			//设置添加信息
 			Student student=new Student();
-			student.setSname("小花");
-			student.setSnumber("123123234");
-			student.setSpass("1234");
-			student.setSsex("女");
-			student.setSage(19);
-			student.setSdate("2015");
-			student.setCid(1);
-			student.setAid(2);
-			student.setIsSchool(1);
+			student.setSname("赵小明");
+			student.setSnumber("2511150307");
+		    student.setSclass("15级3班");
+		    student.setScourse("离散数学");
+		    student.setSscore("46");
 			
 			//通过SqlSession操作数据库
 			sqlSession.insert("test.insertStudent", student);
@@ -155,16 +151,11 @@ public class MybatisFirst {
 			
 			//设置添加信息
 			Student student=new Student();
-			student.setSid(11);
-			student.setSname("小花");
-			student.setSnumber("123122334");
-			student.setSpass("1234");
-			student.setSsex("女");
-			student.setSage(19);
-			student.setSdate("2015");
-			student.setCid(1);
-			student.setAid(2);
-			student.setIsSchool(1);
+			student.setSname("赵小明");
+			student.setSnumber("2511150307");
+		    student.setSclass("15级3班");
+		    student.setScourse("离散数学");
+		    student.setSscore("46");
 			
 			//打开会话
 			SqlSession sqlSession=sqlSessionFactory.openSession();

@@ -49,15 +49,11 @@ public class StudentDaoImplTest {
 		IStudentDao iStudentDao=new StudentDaoImpl(sqlSessionFactory);
 	     
 		Student student=new Student();
-		student.setSname("小明");
-		student.setSnumber("123123456");
-		student.setSpass("1234");
-		student.setSsex("女");
-		student.setSage(19);
-		student.setSdate("2015");
-		student.setCid(1);
-		student.setAid(2);
-		student.setIsSchool(1);
+		student.setSname("李斯");
+		student.setSnumber("2511150301");
+	    student.setSclass("15级3班");
+	    student.setScourse("离散数学");
+	    student.setSscore("70");
 		
 		//调用IStudentDao的方法
 		iStudentDao.insertStudent(student);

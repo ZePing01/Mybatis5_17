@@ -21,7 +21,7 @@ public class JDBCTest {
 		Class.forName("com.mysql.jdbc.Driver"); 
 		
 		//获取数据库连接
-		connection=DriverManager.getConnection("jdbc:mysql://172.16.120.116:3306/signin?useUnicode=true&characterEncoding=utf8","root","zhaobo..");
+		connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/SCM?useUnicode=true&characterEncoding=utf8","root","lizewei");
 		
 		//定义sql语句，？表示占位符
 		String sql="select * from db_student where sname=?";

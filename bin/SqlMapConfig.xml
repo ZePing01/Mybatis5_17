@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <!-- 上面是约束 -->
 
 <configuration>
+   
     <!-- 加载属性文件 -->
     <properties resource="db.properties">
        <!-- properties中还可以配置一些属性名和属性值 -->
@@ -42,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 加载映射文件 -->
 	<mappers>
 	  <mapper resource="sqlmap/Student.xml"/>
-	  <!-- 通过Resource方法一次家在一个映射文件 -->
+	  <!-- 通过Resource方法一次加载一个映射文件 -->
 	  <!-- <mapper resource="mapper/StudentMapper.xml"/> --><!-- 注意路径 -->
 	  
 	  <!-- 通过Mapper接口加载映射文件
